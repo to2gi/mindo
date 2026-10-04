@@ -61,7 +61,8 @@ export default function App() {
     try {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "ar-SA";
+      const hasArabic = /[\u0600-\u06FF]/.test(text);
+      utterance.lang = hasArabic ? "ar-SA" : "en-US";
       utterance.rate = 1.02;
       window.speechSynthesis.speak(utterance);
     } catch {

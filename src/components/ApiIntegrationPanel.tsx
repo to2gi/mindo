@@ -86,11 +86,13 @@ class MindoCloudBrainClient(private val tts: TextToSpeech) {
             val json = JSONObject(response.body?.string() ?: "{}")
             val question = json.optString("question", userQuestionText)
             val answerText = json.optString("answer", json.optString("spokenReply", ""))
+            val ttsLocale = json.optString("ttsLocale", "ar-SA")
             val structured = json.optJSONObject("structuredData")
             val deviceAction = structured?.optJSONObject("deviceAction")
             val targetApp = deviceAction?.optString("targetApp")
 
-            // تطبيق الهاتف هو الذي يقوم بقراءة الإجابة النصية للمستخدم عبر محرك قراءة الهاتف:
+            // ضبط لغة قارئ الهاتف تلقائياً لتطابق لغة السؤال والإجابة ثم قراءتها:
+            tts.language = java.util.Locale.forLanguageTag(ttsLocale)
             tts.speak(answerText, TextToSpeech.QUEUE_FLUSH, null, "mindo_reply")
 
             onResult(question, answerText, targetApp)

@@ -1,0 +1,63 @@
+{
+  "routingConfig": {
+    "strategy": "smart_hybrid",
+    "enableAutoFallback": true,
+    "enableSearchGrounding": true,
+    "enableKeylessPrecompute": true,
+    "mobilePayloadCompression": "ultra_light",
+    "maxSpokenWords": 55
+  },
+  "keepAliveConfig": {
+    "enabled": true,
+    "intervalMinutes": 4,
+    "targetUrl": "https://ais-dev-2a4fjq2omvefidwuxkq4qs-649456565958.europe-west2.run.app",
+    "totalHeartbeats": 41,
+    "lastHeartbeatAt": "2026-10-04T11:37:18.544Z",
+    "lastHeartbeatStatus": "ok"
+  },
+  "engines": [
+    {
+      "id": "gemini-3.8-flash",
+      "enabled": true,
+      "priority": 1,
+      "totalCalls": 0,
+      "avgLatencyMs": 0
+    },
+    {
+      "id": "gemini-3.1-flash-lite",
+      "enabled": true,
+      "priority": 2,
+      "totalCalls": 1,
+      "avgLatencyMs": 1935
+    },
+    {
+      "id": "keyless-math-engine",
+      "enabled": true,
+      "priority": 1,
+      "totalCalls": 2,
+      "avgLatencyMs": 2
+    },
+    {
+      "id": "keyless-knowledge-mesh",
+      "enabled": true,
+      "priority": 2,
+      "totalCalls": 0,
+      "avgLatencyMs": 185
+    },
+    {
+      "id": "open-llm-keyless",
+      "enabled": true,
+      "priority": 3,
+      "totalCalls": 0,
+      "avgLatencyMs": 650
+    },
+    {
+      "id": "groq-lpu-route",
+      "enabled": true,
+      "priority": 3,
+      "totalCalls": 0,
+      "avgLatencyMs": 0
+    }
+  ],
+  "taskLogs": []
+}
