@@ -55,7 +55,7 @@ export const MindoSimulatorView: React.FC<MindoSimulatorViewProps> = ({
     initialCommand || PRESET_COMMANDS[0].command
   );
   const [preferredEngine, setPreferredEngine] = useState<string>("auto");
-  const [speakOutLoud, setSpeakOutLoud] = useState<boolean>(true);
+  const [speakOutLoud, setSpeakOutLoud] = useState<boolean>(false);
   const [isListening, setIsListening] = useState<boolean>(false);
   const [speechError, setSpeechError] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
@@ -324,17 +324,29 @@ export const MindoSimulatorView: React.FC<MindoSimulatorViewProps> = ({
           </div>
         ) : (
           <div className="space-y-6">
-            {/* Spoken Reply for Mindo Voice Assistant */}
-            <div className="bg-slate-950 border border-slate-800 rounded-lg p-5 space-y-2">
-              <div className="flex items-center justify-between text-xs text-slate-400">
-                <span>الرد الصوتي المباشر لتطبيق ميندو (spokenReply)</span>
-                <span className="text-emerald-400 font-medium">
-                  {latestLog.selectedEngineName}
-                </span>
+            {/* Question + Text Answer Box Sent to Mobile App */}
+            <div className="bg-slate-950 border border-slate-800 rounded-lg p-5 space-y-3">
+              <div className="pb-3 border-b border-slate-800/80">
+                <div className="text-xs text-slate-400 mb-1">
+                  السؤال المرسل (question):
+                </div>
+                <p className="text-sm text-slate-200 leading-relaxed">
+                  &quot;{latestLog.voiceCommand}&quot;
+                </p>
               </div>
-              <p className="text-base font-medium text-white leading-relaxed">
-                &quot;{latestLog.spokenReply}&quot;
-              </p>
+              <div>
+                <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                  <span>
+                    الإجابة النصية الصافية المرسلة لتطبيق الهاتف ليقرأها بنفسه (answer):
+                  </span>
+                  <span className="text-emerald-400 font-medium">
+                    {latestLog.selectedEngineName}
+                  </span>
+                </div>
+                <p className="text-base font-medium text-white leading-relaxed">
+                  &quot;{latestLog.spokenReply}&quot;
+                </p>
+              </div>
             </div>
 
             {/* Detailed Answer (Full Deep Explanation) */}
@@ -440,6 +452,8 @@ export const MindoSimulatorView: React.FC<MindoSimulatorViewProps> = ({
                       {
                         status: "ok",
                         requestId: latestLog.id,
+                        question: latestLog.voiceCommand,
+                        answer: latestLog.spokenReply,
                         spokenReply: latestLog.spokenReply,
                         detailedAnswer: latestLog.detailedAnswer,
                         structuredData: latestLog.structuredData,

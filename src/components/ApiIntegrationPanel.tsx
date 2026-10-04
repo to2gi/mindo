@@ -38,8 +38,10 @@ export const ApiIntegrationPanel: React.FC<ApiIntegrationPanelProps> = ({
     {
       kotlin: {
         title:
-          "Android (Kotlin + OkHttp) — مع نبضة استيقاظ استباقية عند فتح التطبيق",
-        code: `// كود الربط داخل تطبيق ميندو للأندرويد (Mindo Android Voice Service)
+          "Android (Kotlin + OkHttp + TextToSpeech) — يستلم النص ويقرأه تطبيق الهاتف بنفسه",
+        code: `// كود الربط داخل تطبيق ميندو للأندرويد (Mindo Android App)
+// الخادم يرسل النص الصافي فقط (بدون ملفات صوت ثقيلة)، وتطبيق الهاتف هو الذي يقرأ الإجابة للمستخدم
+import android.speech.tts.TextToSpeech
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -47,7 +49,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
-class MindoCloudBrainClient {
+class MindoCloudBrainClient(private val tts: TextToSpeech) {
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
         .readTimeout(20, TimeUnit.SECONDS)
@@ -56,7 +58,7 @@ class MindoCloudBrainClient {
     private val executeEndpoint = "${endpointUrl}"
     private val pingEndpoint = "${pingEndpointUrl}"
 
-    // استدعِ هذه الدالة فور فتح المستخدم لتطبيق ميندو أو ضغط زر الميكروفون لضمان يقظة الخادم 100%
+    // نبضة استباقية عند فتح التطبيق لضمان يقظة السيرفر
     fun warmUpServerAsync() {
         Thread {
             try {
@@ -66,9 +68,12 @@ class MindoCloudBrainClient {
         }.start()
     }
 
-    fun offloadHeavyCommand(voiceText: String, onResult: (spokenReply: String, detailed: String, targetApp: String?) -> Unit) {
+    fun sendQuestionToServer(
+        userQuestionText: String,
+        onResult: (question: String, answerText: String, targetApp: String?) -> Unit
+    ) {
         val payload = JSONObject().apply {
-            put("query", voiceText)
+            put("query", userQuestionText)
             put("deviceId", "mindo-android-user")
             put("deviceModel", android.os.Build.MODEL)
             put("preferredEngine", "auto")
@@ -79,20 +84,24 @@ class MindoCloudBrainClient {
 
         client.newCall(request).execute().use { response ->
             val json = JSONObject(response.body?.string() ?: "{}")
-            val spokenReply = json.optString("spokenReply", "تم تنفيذ طلبك")
-            val detailedAnswer = json.optString("detailedAnswer", spokenReply)
+            val question = json.optString("question", userQuestionText)
+            val answerText = json.optString("answer", json.optString("spokenReply", ""))
             val structured = json.optJSONObject("structuredData")
             val deviceAction = structured?.optJSONObject("deviceAction")
             val targetApp = deviceAction?.optString("targetApp")
 
-            onResult(spokenReply, detailedAnswer, targetApp)
+            // تطبيق الهاتف هو الذي يقوم بقراءة الإجابة النصية للمستخدم عبر محرك قراءة الهاتف:
+            tts.speak(answerText, TextToSpeech.QUEUE_FLUSH, null, "mindo_reply")
+
+            onResult(question, answerText, targetApp)
         }
     }
 }`,
       },
       flutter: {
-        title: "Flutter / Dart (Android & iOS) — مع نبضة منع السبات",
+        title: "Flutter / Dart — يستلم السؤال والإجابة النصية ليقرأها تطبيق الهاتف",
         code: `// كود الربط لتطبيق ميندو عبر Flutter
+// السيرفر يُرجع السؤال والإجابة النصية فقط (خفيفة جداً) وتطبيق الهاتف يقرأها
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -100,19 +109,18 @@ class MindoBrainService {
   static const String executeEndpoint = '${endpointUrl}';
   static const String pingEndpoint = '${pingEndpointUrl}';
 
-  // يُستدعى عند تشغيل التطبيق لإبقاء الخادم في حالة يقظة فورية
   static Future<void> warmUpServer() async {
     try {
       await http.get(Uri.parse(pingEndpoint)).timeout(const Duration(seconds: 5));
     } catch (_) {}
   }
 
-  static Future<Map<String, dynamic>> sendHeavyTask(String voiceCommand) async {
+  static Future<Map<String, dynamic>> askMindoServer(String userQuestion) async {
     final response = await http.post(
       Uri.parse(executeEndpoint),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        'query': voiceCommand,
+        'query': userQuestion,
         'deviceId': 'mindo-flutter-client',
         'deviceModel': 'Mindo Mobile v2.5',
         'preferredEngine': 'auto',
@@ -120,7 +128,11 @@ class MindoBrainService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(utf8.decode(response.bodyBytes));
+      final data = jsonDecode(utf8.decode(response.bodyBytes));
+      // data['question'] -> السؤال المرسل
+      // data['answer'] -> الإجابة النصية الصافية التي يقرأها تطبيق الهاتف بنفسه
+      // data['detailedAnswer'] -> الشرح الكامل لعرضه على شاشة الهاتف
+      return data;
     } else {
       throw Exception('فشل الاتصال بعقل ميندو السحابي');
     }
@@ -128,8 +140,8 @@ class MindoBrainService {
 }`,
       },
       react_native: {
-        title: "React Native / Expo (TypeScript)",
-        code: `// إرسال المهام الثقيلة من تطبيق ميندو إلى الخادم السحابي
+        title: "React Native / Expo (TypeScript) — استلام النص فقط للقراءة المحلية",
+        code: `// إرسال السؤال من تطبيق ميندو واستلام الإجابة النصية فقط ليقرأها الهاتف
 const BASE_URL = "${cleanBase}";
 
 export async function warmUpMindoServer() {
@@ -138,12 +150,12 @@ export async function warmUpMindoServer() {
   } catch {}
 }
 
-export async function executeMindoCloudTask(voiceTranscript: string) {
+export async function executeMindoCloudTask(userQuestion: string) {
   const response = await fetch(\`\${BASE_URL}/api/v1/mindo/execute\`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: voiceTranscript,
+      query: userQuestion,
       deviceId: "mindo-rn-mobile",
       deviceModel: "Mindo Mobile App",
       preferredEngine: "auto"
@@ -151,8 +163,10 @@ export async function executeMindoCloudTask(voiceTranscript: string) {
   });
 
   const result = await response.json();
+  // يقوم تطبيق الهاتف بقراءة result.answer عبر مكتبة النص-إلى-كلام في الهاتف
   return {
-    spokenReply: result.spokenReply,
+    question: result.question,
+    answer: result.answer,
     detailedAnswer: result.detailedAnswer,
     computedResult: result.structuredData?.computedResult,
     deviceAction: result.structuredData?.deviceAction,

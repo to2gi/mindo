@@ -224,7 +224,7 @@ export default function App() {
   const openSimulatorWithCommand = (cmd: string) => {
     setSimulatorPreset(cmd);
     setActiveTab("simulator");
-    handleExecuteCommand(cmd, "auto", true);
+    handleExecuteCommand(cmd, "auto", false);
   };
 
   const fullEndpointUrl =

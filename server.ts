@@ -891,6 +891,8 @@ ${
   const mobileResponsePayload = {
     status: "ok",
     requestId: `mindo-${Date.now().toString(36)}`,
+    question: cleanQuery,
+    answer: parsedOutput.spokenReply,
     spokenReply: parsedOutput.spokenReply,
     detailedAnswer: parsedOutput.detailedAnswer,
     structuredData: {
