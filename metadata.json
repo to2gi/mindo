@@ -1,0 +1,6 @@
+{
+  "name": "Mindo Cloud Brain — لوحة تحكم ومحرك ميندو السحابي",
+  "description": "المحرك السحابي ولوحة تحكم الأدمن لتطبيق المساعد الصوتي ميندو (Mindo) لمعالجة المهام الثقيلة، العمليات الحسابية، والبحث الذكي عبر نماذج الذكاء الاصطناعي المتعددة.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

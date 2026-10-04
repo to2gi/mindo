@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mindo-cloud-brain
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/v1/mindo/ping
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ENABLE_KEEP_ALIVE
+        value: "true"
