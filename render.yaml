@@ -3,7 +3,7 @@ services:
     name: mindo-cloud-brain
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --legacy-peer-deps && npm run build
     startCommand: npm run start
     healthCheckPath: /api/v1/mindo/ping
     envVars:
