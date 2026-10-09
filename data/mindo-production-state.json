@@ -11,8 +11,8 @@
     "enabled": true,
     "intervalMinutes": 4,
     "targetUrl": "https://ais-dev-2a4fjq2omvefidwuxkq4qs-649456565958.europe-west2.run.app",
-    "totalHeartbeats": 41,
-    "lastHeartbeatAt": "2026-10-04T11:37:18.544Z",
+    "totalHeartbeats": 59,
+    "lastHeartbeatAt": "2026-10-09T19:45:06.036Z",
     "lastHeartbeatStatus": "ok"
   },
   "engines": [
@@ -20,28 +20,28 @@
       "id": "gemini-3.8-flash",
       "enabled": true,
       "priority": 1,
-      "totalCalls": 0,
-      "avgLatencyMs": 0
+      "totalCalls": 1,
+      "avgLatencyMs": 13349
     },
     {
       "id": "gemini-3.1-flash-lite",
       "enabled": true,
       "priority": 2,
-      "totalCalls": 1,
-      "avgLatencyMs": 1935
+      "totalCalls": 4,
+      "avgLatencyMs": 2045
     },
     {
       "id": "keyless-math-engine",
       "enabled": true,
       "priority": 1,
-      "totalCalls": 2,
+      "totalCalls": 5,
       "avgLatencyMs": 2
     },
     {
       "id": "keyless-knowledge-mesh",
       "enabled": true,
       "priority": 2,
-      "totalCalls": 0,
+      "totalCalls": 10,
       "avgLatencyMs": 185
     },
     {
