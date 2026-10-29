@@ -6,16 +6,34 @@ import {
   Volume2,
   Copy,
   Check,
+  Cloud,
+  Zap,
+  MessageSquare,
+  Bot,
+  Layers,
+  Sparkles,
 } from "lucide-react";
 import { OverviewData, RoutingConfig, TaskLogEntry } from "./types";
 import { MindoSimulatorView } from "./components/MindoSimulatorView";
 import { EnginesPoolView } from "./components/EnginesPoolView";
 import { TaskLogsView } from "./components/TaskLogsView";
 import { ApiIntegrationPanel } from "./components/ApiIntegrationPanel";
+import { OnlineTaskExecutorView } from "./components/OnlineTaskExecutorView";
+import { FreeChatHubView } from "./components/FreeChatHubView";
 
-type ActiveTab = "overview" | "simulator" | "engines" | "logs" | "integration";
+type ActiveTab =
+  | "overview"
+  | "simulator"
+  | "engines"
+  | "logs"
+  | "integration"
+  | "online_tasks"
+  | "free_chat";
+
+type MainSection = "cloud_content" | "online_tasks" | "free_chat";
 
 export default function App() {
+  const [mainSection, setMainSection] = useState<MainSection>("cloud_content");
   const [activeTab, setActiveTab] = useState<ActiveTab>("overview");
   const [overview, setOverview] = useState<OverviewData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -255,62 +273,69 @@ export default function App() {
           Mindo Cloud Brain
         </a>
 
-        {/* Zone 2: 5 clean text navigation links */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-400">
+        {/* Zone 2: Navigation Links */}
+        <nav className="hidden md:flex items-center gap-5 text-sm font-medium text-slate-400">
           <button
             type="button"
-            onClick={() => setActiveTab("overview")}
-            className={`py-1 transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "overview"
-                ? "text-white underline underline-offset-8 decoration-emerald-500 decoration-2"
+            onClick={() => {
+              setMainSection("cloud_content");
+              setActiveTab("overview");
+            }}
+            className={`py-1 transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+              mainSection === "cloud_content" && activeTab !== "integration"
+                ? "text-emerald-400 font-bold underline underline-offset-8 decoration-emerald-500 decoration-2"
                 : "hover:text-slate-200"
             }`}
           >
-            لوحة المراقبة الحية
+            <Cloud className="w-4 h-4" />
+            القسم الأول: محتوى مايندو السحابي
           </button>
+
           <button
             type="button"
-            onClick={() => setActiveTab("simulator")}
-            className={`py-1 transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "simulator"
-                ? "text-white underline underline-offset-8 decoration-emerald-500 decoration-2"
+            onClick={() => {
+              setMainSection("online_tasks");
+              setActiveTab("online_tasks");
+            }}
+            className={`py-1 transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+              mainSection === "online_tasks"
+                ? "text-emerald-400 font-bold underline underline-offset-8 decoration-emerald-500 decoration-2"
                 : "hover:text-slate-200"
             }`}
           >
-            بوابة التنفيذ الحي
+            <Zap className="w-4 h-4" />
+            القسم الثاني: منفّذ مهام الأونلاين (وضع الاستعداد)
           </button>
+
           <button
             type="button"
-            onClick={() => setActiveTab("engines")}
-            className={`py-1 transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "engines"
-                ? "text-white underline underline-offset-8 decoration-emerald-500 decoration-2"
+            onClick={() => {
+              setMainSection("free_chat");
+              setActiveTab("free_chat");
+            }}
+            className={`py-1 transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+              mainSection === "free_chat"
+                ? "text-cyan-400 font-bold underline underline-offset-8 decoration-cyan-500 decoration-2"
                 : "hover:text-slate-200"
             }`}
           >
-            النماذج والمحركات
+            <MessageSquare className="w-4 h-4" />
+            دردشة النماذج المجانية (غير محدودة)
           </button>
+
           <button
             type="button"
-            onClick={() => setActiveTab("logs")}
-            className={`py-1 transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "logs"
-                ? "text-white underline underline-offset-8 decoration-emerald-500 decoration-2"
-                : "hover:text-slate-200"
-            }`}
-          >
-            سجل المهام الفعلية
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("integration")}
+            onClick={() => {
+              setMainSection("cloud_content");
+              setActiveTab("integration");
+            }}
             className={`py-1 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === "integration"
                 ? "text-white underline underline-offset-8 decoration-emerald-500 decoration-2"
                 : "hover:text-slate-200"
             }`}
           >
-            النشر على Render وربط الهاتف
+            ربط الهاتف وRender
           </button>
         </nav>
 
@@ -327,28 +352,124 @@ export default function App() {
         </div>
       </header>
 
-      {/* Mobile Navigation Bar */}
-      <div className="md:hidden flex items-center gap-2 overflow-x-auto px-4 py-2.5 bg-slate-950 border-b border-slate-800 text-xs">
-        {[
-          { id: "overview", label: "لوحة المراقبة" },
-          { id: "simulator", label: "التنفيذ الحي" },
-          { id: "engines", label: "المحركات" },
-          { id: "logs", label: "سجل المهام" },
-          { id: "integration", label: "ربط الهاتف" },
-        ].map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => setActiveTab(item.id as ActiveTab)}
-            className={`px-3 py-1.5 rounded-md font-medium whitespace-nowrap ${
-              activeTab === item.id
-                ? "bg-slate-800 text-white"
-                : "text-slate-400"
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
+      {/* 2-Part Super-Section Division Bar */}
+      <div className="bg-[#0b101e] border-b border-slate-800/80 px-6 py-2.5">
+        <div className="max-w-[1380px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
+            <span className="text-xs font-bold text-slate-400 shrink-0">أقسام المنصة:</span>
+            <div className="flex items-center p-1 rounded-xl bg-slate-900 border border-slate-800 shrink-0">
+              <button
+                type="button"
+                onClick={() => {
+                  setMainSection("cloud_content");
+                  if (activeTab === "online_tasks" || activeTab === "free_chat") {
+                    setActiveTab("overview");
+                  }
+                }}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  mainSection === "cloud_content"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <Cloud className="w-3.5 h-3.5" />
+                القسم الأول: محتوى مايندو السحابي
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMainSection("online_tasks");
+                  setActiveTab("online_tasks");
+                }}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  mainSection === "online_tasks"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <Zap className="w-3.5 h-3.5" />
+                القسم الثاني: منفّذ مهام الأونلاين (وضع الاستعداد)
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMainSection("free_chat");
+                  setActiveTab("free_chat");
+                }}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                  mainSection === "free_chat"
+                    ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                دردشة النماذج المجانية (غير محدودة 100%)
+              </button>
+            </div>
+          </div>
+
+          {mainSection === "cloud_content" && (
+            <div className="flex items-center gap-3 overflow-x-auto text-xs font-medium text-slate-400">
+              <button
+                type="button"
+                onClick={() => setActiveTab("overview")}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  activeTab === "overview"
+                    ? "bg-slate-800 text-emerald-400 font-bold"
+                    : "hover:text-slate-200"
+                }`}
+              >
+                لوحة المراقبة
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("simulator")}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  activeTab === "simulator"
+                    ? "bg-slate-800 text-emerald-400 font-bold"
+                    : "hover:text-slate-200"
+                }`}
+              >
+                بوابة التنفيذ الحي
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("engines")}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  activeTab === "engines"
+                    ? "bg-slate-800 text-emerald-400 font-bold"
+                    : "hover:text-slate-200"
+                }`}
+              >
+                المحركات
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("logs")}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  activeTab === "logs"
+                    ? "bg-slate-800 text-emerald-400 font-bold"
+                    : "hover:text-slate-200"
+                }`}
+              >
+                سجل المهام
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("integration")}
+                className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
+                  activeTab === "integration"
+                    ? "bg-slate-800 text-emerald-400 font-bold"
+                    : "hover:text-slate-200"
+                }`}
+              >
+                النشر وربط الهاتف
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Main Content Container */}
@@ -846,6 +967,16 @@ export default function App() {
                 onUpdateKeepAlive={handleUpdateKeepAlive}
                 onQuickTest={openSimulatorWithCommand}
               />
+            )}
+
+            {/* ONLINE TASK EXECUTOR TAB (القسم الثاني) */}
+            {activeTab === "online_tasks" && (
+              <OnlineTaskExecutorView onSpeak={speakArabicText} />
+            )}
+
+            {/* FREE CHAT HUB TAB (قسم الدردشة المجانية) */}
+            {activeTab === "free_chat" && (
+              <FreeChatHubView onSpeak={speakArabicText} />
             )}
           </>
         )}

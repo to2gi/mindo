@@ -70,10 +70,12 @@ class MindoCloudBrainClient(private val tts: TextToSpeech) {
 
     fun sendQuestionToServer(
         userQuestionText: String,
+        targetSection: String = "cloud_content", // التوجيه التلقائي: "cloud_content" أو "online_tasks" أو "free_chat"
         onResult: (question: String, answerText: String, targetApp: String?) -> Unit
     ) {
         val payload = JSONObject().apply {
             put("query", userQuestionText)
+            put("section", targetSection) // يحدد الخادم تلقائياً إلى أي قسم يوجه الطلب
             put("deviceId", "mindo-android-user")
             put("deviceModel", android.os.Build.MODEL)
             put("preferredEngine", "auto")
@@ -117,12 +119,16 @@ class MindoBrainService {
     } catch (_) {}
   }
 
-  static Future<Map<String, dynamic>> askMindoServer(String userQuestion) async {
+  static Future<Map<String, dynamic>> askMindoServer(
+    String userQuestion, {
+    String section = 'cloud_content', // التوجيه التلقائي: 'cloud_content' أو 'online_tasks' أو 'free_chat'
+  }) async {
     final response = await http.post(
       Uri.parse(executeEndpoint),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'query': userQuestion,
+        'section': section, // الخادم يوجه الطلب للقسم المطلوب تلقائياً
         'deviceId': 'mindo-flutter-client',
         'deviceModel': 'Mindo Mobile v2.5',
         'preferredEngine': 'auto',

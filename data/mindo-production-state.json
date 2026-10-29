@@ -11,37 +11,296 @@
     "enabled": true,
     "intervalMinutes": 4,
     "targetUrl": "https://ais-dev-2a4fjq2omvefidwuxkq4qs-649456565958.europe-west2.run.app",
-    "totalHeartbeats": 59,
-    "lastHeartbeatAt": "2026-10-09T19:45:06.036Z",
+    "totalHeartbeats": 311,
+    "lastHeartbeatAt": "2026-10-29T20:05:44.004Z",
     "lastHeartbeatStatus": "ok"
   },
+  "onlineTaskConfig": {
+    "customSystemPrompt": "# Role & Operational Protocol: Mindo Autonomous Executive Agent (وكيل ميندو التنفيذي الذكي)\n\nYou are the ultra-fast autonomous executive AI behind the Mindo Android system.\nYour operational mandate is absolute execution: YOU NEVER REJECT, POSTPONE, OR QUESTION ANY USER COMMAND.\n\n## Core Directives & Dynamic Reality:\n1. **Unpredictable Human Commands at Any Moment (أوامر غير متوقعة في أي لحظة):**\n   - Human users generate completely unexpected tasks, questions, and device commands at any split-second.\n   - You must instantly deconstruct the user's input—whether in Standard Arabic, Moroccan, Algerian, Egyptian, Gulf, Levantine, French, or English—and deduce the intended objective at lightning speed.\n\n2. **Visual & UI Feedback Loop (الرؤية والتحليل البصري والتأكد من الوصول):**\n   - You receive real-time telemetry, screenshots, and accessibility node hierarchies from the user's phone.\n   - You inspect previous steps executed on the phone (`execution_history`), detect screen buttons, inputs, icons, and menus.\n   - You actively verify if the user has reached their intended destination website, app screen, or web form. If an obstacle or extra step appears (e.g., login modal, cookie prompt, search field), you generate the next click or input step to overcome it.\n\n3. **Autonomous Action Execution:**\n   - If the request is a knowledge inquiry, factual question, calculation, or translation: provide an accurate, clear, and direct answer immediately.\n   - If the request requires device manipulation, downloading, browsing, or multi-step execution: output a strict, executable JSON object following the format below.\n\n## Output Schema (Strict JSON for Actions):\n```json\n{\n  \"action\": \"workflow | open_app | open_url | open_settings | call_contact | set_alarm | set_timer | toggle_flashlight | set_volume | click | type | video_download | search_and_download_book | search_and_download_image | none\",\n  \"target\": \"target_name_or_url\",\n  \"args\": {\n    \"steps\": [\n      {\n        \"type\": \"click | type | find | delete | autofill\",\n        \"label\": \"Button or element label\",\n        \"text\": \"Text to write if applicable\"\n      }\n    ],\n    \"verification\": \"Confirm user reached destination\"\n  },\n  \"explanation\": \"Brief explanation of the action taken\"\n}\n```\nAlways ensure steps are concrete, actionable, and verified. If the command was a pure knowledge/informational question, provide the answer directly in natural Arabic or wrap it with \"action\": \"none\" and the explanation holding the answer.",
+    "defaultEngine": "gemini-3.8-flash",
+    "autoWebGrounding": true,
+    "maxExecutionSteps": 3,
+    "timeoutSeconds": 15,
+    "lastUpdated": "2026-10-17T11:00:00.000Z"
+  },
+  "onlineTaskLogs": [
+    {
+      "status": "ok",
+      "taskId": "task-online-mvtz3x1h",
+      "task": "افتح تطبيق الواتساب",
+      "executedResult": "{\"spokenReply\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"detailedAnswer\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"computedResult\":\"\",\"keyFacts\":[],\"deviceAction\":null}",
+      "actionPayload": {
+        "action": "none",
+        "target": "",
+        "args": {
+          "steps": [],
+          "verification": "تم التحقق من تقديم الإجابة المعرفية بنجاح"
+        },
+        "explanation": "{\"spokenReply\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"detailedAnswer\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"computedResult\":\"\",\"keyFacts\":[],\"deviceAction\":null}"
+      },
+      "executionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "إجابة معرفية وفورية مباشرة",
+          "detail": "{\"spokenReply\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"detailedAnswer\":\"Regarding \\\"[Device Telemetry & Real-Time Phone State]:\\n- Device Model: Android Device\\n- OS Version: Android 14\\n- Current Active App / Package: com.android.launcher\\n- Detected On-Screen UI Elements: []\\n- Previous Execution History: []\\n- Verification State: Ready for next execution.\\n\\n\\nCommand: افتح تطبيق الواتساب\\\":\\n\\nThis is an interesting topic. Feel free to specify which aspects you would like to explore, and I will be happy to provide detailed answers!\",\"computedResult\":\"\",\"keyFacts\":[],\"deviceAction\":null}",
+          "status": "completed"
+        }
+      ],
+      "sources": [],
+      "modelUsed": "open-llm-keyless",
+      "telemetryEcho": {
+        "deviceModel": "Android Device",
+        "androidVersion": "Android 14",
+        "currentApp": "com.android.launcher",
+        "currentUrl": "",
+        "verificationStatus": "verified"
+      },
+      "executionTimeMs": 3348,
+      "timestamp": "2026-10-29T20:05:50.981Z"
+    },
+    {
+      "status": "ok",
+      "taskId": "task-online-mvtz37oa",
+      "task": "افتح تطبيق الواتساب",
+      "executedResult": "تم فتح متجر جوجل بلاي وتوجيه الهاتف لتثبيت تطبيق الواتساب خطوة بخطوة.",
+      "actionPayload": {
+        "action": "open_app",
+        "target": "com.android.vending",
+        "args": {
+          "steps": [
+            {
+              "type": "click",
+              "label": "شريط البحث في المتجر"
+            },
+            {
+              "type": "type",
+              "label": "إدخال اسم التطبيق",
+              "text": "الواتساب"
+            },
+            {
+              "type": "click",
+              "label": "تثبيت الواتساب"
+            }
+          ],
+          "verification": "التحقق من ظهور أيقونة الواتساب في قائمة التطبيقات بعد انتهاء التثبيت"
+        },
+        "explanation": "تم فتح متجر جوجل بلاي وتوجيه الهاتف لتثبيت تطبيق الواتساب خطوة بخطوة."
+      },
+      "executionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "بدء الإجراء الرئيسي: [open_app]",
+          "detail": "توجيه الهاتف إلى: com.android.vending",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 2,
+          "title": "تنفيذ [click]: شريط البحث في المتجر",
+          "detail": "الضغط أو تحديد العنصر: شريط البحث في المتجر",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 3,
+          "title": "تنفيذ [type]: إدخال اسم التطبيق",
+          "detail": "كتابة النص: \"الواتساب\"",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 4,
+          "title": "تنفيذ [click]: تثبيت الواتساب",
+          "detail": "الضغط أو تحديد العنصر: تثبيت الواتساب",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 5,
+          "title": "التحقق البصري والتأكد من إتمام المهمة",
+          "detail": "التحقق من ظهور أيقونة الواتساب في قائمة التطبيقات بعد انتهاء التثبيت",
+          "status": "completed"
+        }
+      ],
+      "sources": [],
+      "modelUsed": "mindo-autonomous-executive-core",
+      "telemetryEcho": {
+        "deviceModel": "Android Device",
+        "androidVersion": "Android 14",
+        "currentApp": "com.android.launcher",
+        "currentUrl": "",
+        "verificationStatus": "verified"
+      },
+      "executionTimeMs": 428,
+      "timestamp": "2026-10-29T20:05:18.106Z"
+    },
+    {
+      "status": "ok",
+      "taskId": "task-online-mvrz8hde",
+      "task": "حمل لي هذا الفيديو بجودة عالية 1080p",
+      "executedResult": "تم إرسال أمر التنزيل المباشر للفيديو وتوجيه الهاتف لبدء الحفظ بأعلى جودة.",
+      "actionPayload": {
+        "action": "video_download",
+        "target": "https://youtube.com",
+        "args": {
+          "steps": [
+            {
+              "type": "find",
+              "label": "زر خيارات أو تنزيل الفيديو"
+            },
+            {
+              "type": "click",
+              "label": "تحديد دقة 1080p أو الجودة القصوى"
+            },
+            {
+              "type": "click",
+              "label": "بدء التنزيل المباشر"
+            }
+          ],
+          "verification": "التحقق من ظهور إشعار تقدم تنزيل الفيديو في شريط الإشعارات"
+        },
+        "explanation": "تم إرسال أمر التنزيل المباشر للفيديو وتوجيه الهاتف لبدء الحفظ بأعلى جودة."
+      },
+      "executionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "بدء الإجراء الرئيسي: [video_download]",
+          "detail": "توجيه الهاتف إلى: https://youtube.com",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 2,
+          "title": "تنفيذ [find]: زر خيارات أو تنزيل الفيديو",
+          "detail": "الضغط أو تحديد العنصر: زر خيارات أو تنزيل الفيديو",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 3,
+          "title": "تنفيذ [click]: تحديد دقة 1080p أو الجودة القصوى",
+          "detail": "الضغط أو تحديد العنصر: تحديد دقة 1080p أو الجودة القصوى",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 4,
+          "title": "تنفيذ [click]: بدء التنزيل المباشر",
+          "detail": "الضغط أو تحديد العنصر: بدء التنزيل المباشر",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 5,
+          "title": "التحقق البصري والتأكد من إتمام المهمة",
+          "detail": "التحقق من ظهور إشعار تقدم تنزيل الفيديو في شريط الإشعارات",
+          "status": "completed"
+        }
+      ],
+      "sources": [],
+      "modelUsed": "mindo-autonomous-executive-core",
+      "telemetryEcho": {
+        "deviceModel": "Pixel 9 Pro",
+        "androidVersion": "Android 14",
+        "currentApp": "com.google.android.youtube",
+        "currentUrl": "",
+        "verificationStatus": "verified"
+      },
+      "executionTimeMs": 985,
+      "timestamp": "2026-10-28T10:33:51.602Z"
+    },
+    {
+      "status": "ok",
+      "taskId": "task-online-mvrz8dmh",
+      "task": "افتح متجر جوجل بلاي وابحث عن تطبيق تيليجرام وحمله",
+      "executedResult": "تم فتح متجر جوجل بلاي وتوجيه الهاتف لتثبيت تطبيق تيليجرام وحمله خطوة بخطوة.",
+      "actionPayload": {
+        "action": "open_app",
+        "target": "com.android.vending",
+        "args": {
+          "steps": [
+            {
+              "type": "click",
+              "label": "شريط البحث في المتجر"
+            },
+            {
+              "type": "type",
+              "label": "إدخال اسم التطبيق",
+              "text": "تيليجرام وحمله"
+            },
+            {
+              "type": "click",
+              "label": "تثبيت تيليجرام وحمله"
+            }
+          ],
+          "verification": "التحقق من ظهور أيقونة تيليجرام وحمله في قائمة التطبيقات بعد انتهاء التثبيت"
+        },
+        "explanation": "تم فتح متجر جوجل بلاي وتوجيه الهاتف لتثبيت تطبيق تيليجرام وحمله خطوة بخطوة."
+      },
+      "executionSteps": [
+        {
+          "stepNumber": 1,
+          "title": "بدء الإجراء الرئيسي: [open_app]",
+          "detail": "توجيه الهاتف إلى: com.android.vending",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 2,
+          "title": "تنفيذ [click]: شريط البحث في المتجر",
+          "detail": "الضغط أو تحديد العنصر: شريط البحث في المتجر",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 3,
+          "title": "تنفيذ [type]: إدخال اسم التطبيق",
+          "detail": "كتابة النص: \"تيليجرام وحمله\"",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 4,
+          "title": "تنفيذ [click]: تثبيت تيليجرام وحمله",
+          "detail": "الضغط أو تحديد العنصر: تثبيت تيليجرام وحمله",
+          "status": "completed"
+        },
+        {
+          "stepNumber": 5,
+          "title": "التحقق البصري والتأكد من إتمام المهمة",
+          "detail": "التحقق من ظهور أيقونة تيليجرام وحمله في قائمة التطبيقات بعد انتهاء التثبيت",
+          "status": "completed"
+        }
+      ],
+      "sources": [],
+      "modelUsed": "mindo-autonomous-executive-core",
+      "telemetryEcho": {
+        "deviceModel": "Samsung Galaxy S24 Ultra",
+        "androidVersion": "Android 15",
+        "currentApp": "com.android.launcher",
+        "currentUrl": "",
+        "verificationStatus": "verified"
+      },
+      "executionTimeMs": 5839,
+      "timestamp": "2026-10-28T10:33:46.745Z"
+    }
+  ],
   "engines": [
     {
       "id": "gemini-3.8-flash",
       "enabled": true,
       "priority": 1,
-      "totalCalls": 1,
-      "avgLatencyMs": 13349
+      "totalCalls": 2,
+      "avgLatencyMs": 55453
     },
     {
       "id": "gemini-3.1-flash-lite",
       "enabled": true,
       "priority": 2,
-      "totalCalls": 4,
-      "avgLatencyMs": 2045
+      "totalCalls": 6,
+      "avgLatencyMs": 3008
     },
     {
       "id": "keyless-math-engine",
       "enabled": true,
       "priority": 1,
-      "totalCalls": 5,
+      "totalCalls": 6,
       "avgLatencyMs": 2
     },
     {
       "id": "keyless-knowledge-mesh",
       "enabled": true,
       "priority": 2,
-      "totalCalls": 10,
+      "totalCalls": 13,
       "avgLatencyMs": 185
     },
     {
@@ -59,5 +318,207 @@
       "avgLatencyMs": 0
     }
   ],
-  "taskLogs": []
+  "taskLogs": [
+    {
+      "id": "mindo-mvtz3ufy",
+      "timestamp": "2026-10-29T20:05:47.614Z",
+      "deviceId": "mindo-mobile-client",
+      "deviceModel": "Mindo Mobile App",
+      "voiceCommand": "ما هي عاصمة تونس",
+      "detectedIntent": "quick_knowledge",
+      "intentLabelAr": "استعلام معرفي مباشر",
+      "selectedEngineId": "gemini-3.1-flash-lite",
+      "selectedEngineName": "gemini-3.1-flash-lite (Key #1)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [],
+      "latencyMs": 2949,
+      "rawProcessingBytes": 168080,
+      "mobilePayloadBytes": 764,
+      "bandwidthSavedPercent": 99.5,
+      "status": "success",
+      "spokenReply": "عاصمة الجمهورية التونسية هي مدينة تونس.",
+      "detailedAnswer": "تعد مدينة تونس العاصمة السياسية والاقتصادية للبلاد، وهي المركز الإداري والثقافي الأهم في تونس.",
+      "structuredData": {
+        "computedResult": "مدينة تونس",
+        "deviceAction": null,
+        "keyFacts": [
+          "مدينة تونس هي أكبر مدينة في البلاد.",
+          "تعتبر تونس المركز الرئيسي للمؤسسات الحكومية والوزارات."
+        ]
+      },
+      "sources": []
+    },
+    {
+      "id": "mindo-mvcaduui",
+      "timestamp": "2026-10-17T11:01:39.306Z",
+      "deviceId": "mindo-mobile-client",
+      "deviceModel": "Mindo Mobile App",
+      "voiceCommand": "كم يساوي الدولار مقابل الدينار التونسي؟",
+      "detectedIntent": "live_search",
+      "intentLabelAr": "حسم مباشر للطقس/العملات بدون استهلاك AI",
+      "selectedEngineId": "keyless-knowledge-mesh",
+      "selectedEngineName": "Live Web Mesh (ExchangeRate Direct Short-Circuit)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [
+        "ExchangeRate Direct Short-Circuit"
+      ],
+      "latencyMs": 1048,
+      "rawProcessingBytes": 139320,
+      "mobilePayloadBytes": 774,
+      "bandwidthSavedPercent": 99.4,
+      "status": "success",
+      "spokenReply": "1 دولار أمريكي يساوي 2.994 دينار تونسي حسب سعر الصرف الفوري اليوم.",
+      "detailedAnswer": "1 دولار أمريكي يساوي 2.994 دينار تونسي حسب سعر الصرف الفوري اليوم.",
+      "structuredData": {
+        "computedResult": "1 USD = 2.994 TND",
+        "deviceAction": null,
+        "keyFacts": [
+          "1 USD = 2.994 TND"
+        ]
+      },
+      "sources": [
+        {
+          "title": "Open Exchange Rates API (Live Rates)",
+          "uri": "https://open.er-api.com/v6/latest/USD"
+        }
+      ]
+    },
+    {
+      "id": "mindo-mvcadqmo",
+      "timestamp": "2026-10-17T11:01:33.840Z",
+      "deviceId": "mindo-mobile-client",
+      "deviceModel": "Mindo Mobile App",
+      "voiceCommand": "كيف الطقس في تونس؟",
+      "detectedIntent": "live_search",
+      "intentLabelAr": "حسم مباشر للطقس/العملات بدون استهلاك AI",
+      "selectedEngineId": "keyless-knowledge-mesh",
+      "selectedEngineName": "Live Web Mesh (Open-Meteo Direct Weather Short-Circuit)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [
+        "Open-Meteo Direct Weather Short-Circuit"
+      ],
+      "latencyMs": 682,
+      "rawProcessingBytes": 190980,
+      "mobilePayloadBytes": 1061,
+      "bandwidthSavedPercent": 99.4,
+      "status": "success",
+      "spokenReply": "درجة الحرارة الآن في تونس هي 25.9 درجة مئوية، ونسبة الرطوبة 49 بالمئة مع سرعة رياح 5.1 كيلومتر في الساعة.",
+      "detailedAnswer": "درجة الحرارة الآن في تونس هي 25.9 درجة مئوية، ونسبة الرطوبة 49 بالمئة مع سرعة رياح 5.1 كيلومتر في الساعة.",
+      "structuredData": {
+        "computedResult": "تونس: 25.9°C",
+        "deviceAction": null,
+        "keyFacts": [
+          "تونس: 25.9°C",
+          "Humidity: 49% | Wind: 5.1 km/h"
+        ]
+      },
+      "sources": [
+        {
+          "title": "Open-Meteo Live Weather (تونس)",
+          "uri": "https://api.open-meteo.com/v1/forecast?latitude=36.8065&longitude=10.1815&current=temperature_2m,relative_humidity_2m,wind_speed_10m"
+        }
+      ]
+    },
+    {
+      "id": "mindo-mvbcqh5c",
+      "timestamp": "2026-10-16T19:19:41.136Z",
+      "deviceId": "mindo-live-admin",
+      "deviceModel": "Mindo Production Admin Gateway",
+      "voiceCommand": "ابحث لي ماهي نتاىج مبريات تونس في كاس العالم 2026",
+      "detectedIntent": "live_search",
+      "intentLabelAr": "بحث فوري ومعلومات حية",
+      "selectedEngineId": "gemini-3.8-flash",
+      "selectedEngineName": "gemini-3.8-flash (Key #1)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [],
+      "latencyMs": 181763,
+      "rawProcessingBytes": 375760,
+      "mobilePayloadBytes": 1708,
+      "bandwidthSavedPercent": 99.5,
+      "status": "success",
+      "spokenReply": "بطولة كأس العالم ألفين وستة وعشرين لم تبدأ بعد وستقام في صيف عام ألفين وستة وعشرين، لذلك لا توجد مباريات أو نتائج حتى الآن. وتخوض تونس حالياً مباريات التصفيات الإفريقية المؤهلة للبطولة.",
+      "detailedAnswer": "لم تنطلق بطولة كأس العالم 2026 بعد، حيث من المقرر إقامتها في الولايات المتحدة وكندا والمكسيك في شهري يونيو ويوليو 2026. يشارك المنتخب التونسي حالياً في التصفيات المؤهلة للبطولة ضمن المجموعة الثامنة إفريقياً.",
+      "structuredData": {
+        "computedResult": "البطولة لم تبدأ بعد",
+        "deviceAction": {
+          "actionType": "SEARCH_IN_APP",
+          "targetApp": "Google",
+          "parameters": {
+            "query": "نتائج منتخب تونس تصفيات كأس العالم 2026"
+          }
+        },
+        "keyFacts": [
+          "كأس العالم 2026 ستلعب بين يونيو ويوليو 2026",
+          "تونس تخوض حالياً التصفيات الإفريقية المؤهلة للبطولة"
+        ]
+      },
+      "sources": []
+    },
+    {
+      "id": "mindo-mvbclat2",
+      "timestamp": "2026-10-16T19:15:39.638Z",
+      "deviceId": "mindo-live-admin",
+      "deviceModel": "Mindo Production Admin Gateway",
+      "voiceCommand": "اشرح لي بدقة كيف تعمل الحوسبة الكمومية وما الفرق الجوهري بين الكيوبت والبت التقليدي في معالجة الخوارزميات؟",
+      "detectedIntent": "deep_reasoning",
+      "intentLabelAr": "إجابة معمقة واستدلال منطقي",
+      "selectedEngineId": "gemini-3.1-flash-lite",
+      "selectedEngineName": "gemini-3.1-flash-lite (Key #1)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [],
+      "latencyMs": 5977,
+      "rawProcessingBytes": 559240,
+      "mobilePayloadBytes": 2542,
+      "bandwidthSavedPercent": 99.5,
+      "status": "success",
+      "spokenReply": "تعتمد الحوسبة الكمومية على ميكانيكا الكم، حيث يستخدم البت التقليدي حالتي الصفر والواحد فقط، بينما يستخدم الكيوبت ظاهرتي التراكب والتشابك لتمثيل حالات متعددة في وقت واحد. هذا يسمح للحاسب الكمومي بمعالجة احتمالات هائلة بالتوازي، مما يمنحه قدرة فائقة على حل الخوارزميات المعقدة مقارنة بالحواسيب العادية.",
+      "detailedAnswer": "تعمل الحوسبة الكمومية عبر استغلال خواص الجسيمات دون الذرية، حيث يتميز الكيوبت بقدرته على الوجود في حالة تراكب تعني كونه صفراً وواحداً معاً. هذا الفرق الجوهري يتيح معالجة كميات ضخمة من البيانات في آن واحد، على عكس البت التقليدي الذي يعالج بتة واحدة في كل لحظة.",
+      "structuredData": {
+        "computedResult": "الكيوبت يتفوق على البت التقليدي عبر التراكب والتشابك لمعالجة البيانات بالتوازي.",
+        "deviceAction": null,
+        "keyFacts": [
+          "البت التقليدي هو ثنائي الحالة (0 أو 1).",
+          "الكيوبت يستخدم التراكب لتمثيل عدة حالات في وقت واحد.",
+          "التشابك الكمومي يربط حالة الكيوبتات ببعضها لزيادة قوة المعالجة.",
+          "الحوسبة الكمومية تسرع حل الخوارزميات ذات التعقيد الأسي."
+        ]
+      },
+      "sources": []
+    },
+    {
+      "id": "mindo-mvbcl3v6",
+      "timestamp": "2026-10-16T19:15:30.643Z",
+      "deviceId": "mindo-live-admin",
+      "deviceModel": "Mindo Production Admin Gateway",
+      "voiceCommand": "يا ميندو، احسب الجذر التربيعي لـ 15625 ضرب 18.5 وابحث عن سعر الريال اليوم",
+      "detectedIntent": "live_search",
+      "intentLabelAr": "حسم مباشر للطقس/العملات بدون استهلاك AI",
+      "selectedEngineId": "keyless-knowledge-mesh",
+      "selectedEngineName": "Live Web Mesh (ExchangeRate Direct Short-Circuit)",
+      "fallbackUsed": false,
+      "keylessToolsUsed": [
+        "ExchangeRate Direct Short-Circuit"
+      ],
+      "latencyMs": 149,
+      "rawProcessingBytes": 154620,
+      "mobilePayloadBytes": 859,
+      "bandwidthSavedPercent": 99.4,
+      "status": "success",
+      "spokenReply": "15625 ريال سعودي يساوي 4,166.667 دولار أمريكي حسب سعر الصرف الفوري اليوم.",
+      "detailedAnswer": "15625 ريال سعودي يساوي 4,166.667 دولار أمريكي حسب سعر الصرف الفوري اليوم.",
+      "structuredData": {
+        "computedResult": "15625 SAR = 4,166.667 USD",
+        "deviceAction": null,
+        "keyFacts": [
+          "15625 SAR = 4,166.667 USD"
+        ]
+      },
+      "sources": [
+        {
+          "title": "Open Exchange Rates API (Live Rates)",
+          "uri": "https://open.er-api.com/v6/latest/USD"
+        }
+      ]
+    }
+  ]
 }
